@@ -11,6 +11,8 @@ import Parse
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var messages:[String]!
+    
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messagetextfield: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     override func viewDidLoad() {
@@ -26,18 +28,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func reload() {
         let query = PFQuery(className: "Message")
         query.addDescendingOrder("createdAt")
+        query.includeKey("user")
         query.findObjectsInBackground { (objects, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                if let objects = objects {
+               /* if let objects = objects {
                     for object in objects {
                         let text = object["text"] as? String
                         if text != "" {
-                            self.messages.append(text!)
+                            let username = (chat["user"] as? PFUser)?.username
                         }
                     }
-                }
+                }*/
             }
         }
         messageTableView.reloadData()
@@ -58,8 +61,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        //cell.business = businesses[indexPath.row]
         cell.message = messages[indexPath.row]
+        cell.messageLabel.text = cell.message
         return cell
     }
     
