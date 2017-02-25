@@ -44,19 +44,18 @@ class LoginViewController: UIViewController {
     }
     @IBAction func signup(_ sender: Any) {
         let user = PFUser()
-        if let password = passwordTextField.text{
+        if let password = passwordTextField.text, !password.isEmpty{
             user.password = password
         }else{
             self.alert()
             return
         }
-        if let username = emailTextField.text{
+        if let username = emailTextField.text, !username.isEmpty{
             user.username = username
         }else{
             self.alert()
             return
         }
-        
         user.signUpInBackground { (success: Bool, error:
             Error?) -> Void in
             if let error = error {
@@ -66,7 +65,8 @@ class LoginViewController: UIViewController {
             } else {
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let chatVC = mainStoryboard.instantiateViewController(withIdentifier: "chatVC") as! ChatViewController
-                self.navigationController?.pushViewController(chatVC, animated: true)
+                //LoginViewController?.//pushViewController(chatVC, animated: true)
+                self.present(chatVC, animated: true, completion: nil)
                 // Hooray! Let them use the app now.
             }
         }
@@ -88,7 +88,8 @@ class LoginViewController: UIViewController {
             }else{
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let chatVC = mainStoryboard.instantiateViewController(withIdentifier: "chatVC") as! ChatViewController
-                self.navigationController?.pushViewController(chatVC, animated: true)
+                self.present(chatVC, animated: true, completion: nil)
+                //LoginViewController?.pushViewController(chatVC, animated: true)
                 //suceessfully log in
             }
             
