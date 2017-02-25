@@ -14,11 +14,6 @@ class MessageCell: UITableViewCell {
     override func awakeFromNib() {
         
         super.awakeFromNib()
-    Timer.scheduledTimer(timeInterval: 5, target: self, selector: "onTimer", userInfo: nil, repeats: true)
-        // Initialization code
-    }
-    func onTimer() {
- 
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
 
