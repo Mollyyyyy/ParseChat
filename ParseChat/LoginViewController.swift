@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func alert(){
-    let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+    let alertController = UIAlertController(title: "Try again", message: "Wrong Password", preferredStyle: .alert)
         // create a cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             // handle cancel response here. Doing nothing will dismiss the view.
